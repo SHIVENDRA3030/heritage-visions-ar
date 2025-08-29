@@ -8,35 +8,58 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Indian Heritage Color Palette */
+    --background: 35 25% 97%;
+    --foreground: 20 25% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 20 25% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 20 25% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Deep Orange - Primary Heritage Color */
+    --primary: 18 85% 55%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 25 90% 65%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Sandstone - Secondary Color */
+    --secondary: 35 35% 85%;
+    --secondary-foreground: 20 25% 20%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Temple Gold */
+    --accent: 45 85% 60%;
+    --accent-foreground: 20 25% 15%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Peacock Blue for highlights */
+    --highlight: 210 85% 45%;
+    --highlight-foreground: 0 0% 100%;
+
+    --muted: 35 20% 90%;
+    --muted-foreground: 20 15% 55%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 35 25% 88%;
+    --input: 35 25% 92%;
+    --ring: 18 85% 55%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    /* Heritage Gradients */
+    --gradient-heritage: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-sunset: linear-gradient(135deg, hsl(18 85% 55%), hsl(45 85% 60%));
+    --gradient-temple: linear-gradient(180deg, hsl(35 25% 97%), hsl(35 35% 92%));
+    
+    /* Cultural Shadows */
+    --shadow-heritage: 0 10px 30px -10px hsl(var(--primary) / 0.3);
+    --shadow-glow: 0 0 40px hsl(var(--primary-glow) / 0.2);
+    --shadow-card: 0 4px 20px -4px hsl(20 25% 15% / 0.1);
+
+    /* Smooth Transitions */
+    --transition-heritage: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 
     --sidebar-background: 0 0% 98%;
 
@@ -56,33 +79,38 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    /* Dark mode with warm heritage tones */
+    --background: 20 25% 8%;
+    --foreground: 35 25% 92%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 20 25% 12%;
+    --card-foreground: 35 25% 92%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 20 25% 12%;
+    --popover-foreground: 35 25% 92%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 25 90% 65%;
+    --primary-foreground: 20 25% 8%;
+    --primary-glow: 35 85% 70%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 20 20% 18%;
+    --secondary-foreground: 35 25% 85%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 45 80% 65%;
+    --accent-foreground: 20 25% 15%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --highlight: 210 80% 55%;
+    --highlight-foreground: 0 0% 100%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --muted: 20 15% 15%;
+    --muted-foreground: 35 15% 65%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 35 25% 92%;
+
+    --border: 20 20% 18%;
+    --input: 20 20% 15%;
+    --ring: 25 90% 65%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -100,6 +128,48 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-poppins;
+    background: linear-gradient(135deg, hsl(var(--background)), hsl(var(--muted)));
+  }
+
+  /* Heritage Typography */
+  .font-heritage {
+    font-family: 'Poppins', sans-serif;
+  }
+
+  /* Cultural Component Styles */
+  .monument-card {
+    @apply bg-card border border-border rounded-lg overflow-hidden shadow-[var(--shadow-card)] 
+           hover:shadow-[var(--shadow-heritage)] transition-[var(--transition-heritage)] 
+           hover:scale-[1.02] cursor-pointer;
+  }
+
+  .heritage-button {
+    @apply bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--primary-glow))] 
+           text-primary-foreground px-6 py-3 rounded-lg font-medium
+           shadow-[var(--shadow-heritage)] hover:shadow-[var(--shadow-glow)]
+           transition-[var(--transition-heritage)] hover:scale-105;
+  }
+
+  .audio-player {
+    @apply bg-gradient-to-r from-[hsl(var(--accent))] to-[hsl(var(--highlight))]
+           text-accent-foreground rounded-full p-4 shadow-lg
+           hover:shadow-[var(--shadow-glow)] transition-[var(--transition-fast)];
+  }
+
+  /* Lightbox and Modal Styles */
+  .lightbox-overlay {
+    @apply bg-black/90 backdrop-blur-sm;
+  }
+
+  /* AR/VR Embed Styles */
+  .embed-container {
+    @apply relative overflow-hidden rounded-lg border border-border 
+           shadow-[var(--shadow-card)] bg-card;
+  }
+
+  .embed-fallback {
+    @apply bg-gradient-to-br from-[hsl(var(--muted))] to-[hsl(var(--secondary))]
+           border-2 border-dashed border-border rounded-lg p-8 text-center;
   }
 }
