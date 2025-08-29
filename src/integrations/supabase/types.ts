@@ -129,6 +129,8 @@ export type Database = {
           historical_details: string | null
           id: string
           location: string | null
+          model_glb_url: string | null
+          model_usdz_url: string | null
           name: string
           period: string | null
           published: boolean
@@ -146,6 +148,8 @@ export type Database = {
           historical_details?: string | null
           id?: string
           location?: string | null
+          model_glb_url?: string | null
+          model_usdz_url?: string | null
           name: string
           period?: string | null
           published?: boolean
@@ -163,6 +167,8 @@ export type Database = {
           historical_details?: string | null
           id?: string
           location?: string | null
+          model_glb_url?: string | null
+          model_usdz_url?: string | null
           name?: string
           period?: string | null
           published?: boolean
