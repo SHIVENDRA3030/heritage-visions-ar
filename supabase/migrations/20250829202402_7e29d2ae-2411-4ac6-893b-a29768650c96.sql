@@ -1,0 +1,62 @@
+-- Insert sample monuments data
+INSERT INTO public.monuments (slug, name, location, build_year, type, period, published, about, historical_details, quick_facts, cover_image, model_glb_url, model_usdz_url) VALUES
+(
+  'taj-mahal',
+  'Taj Mahal',
+  'Agra, Uttar Pradesh',
+  1648,
+  'Mausoleum',
+  'Mughal Era',
+  true,
+  'The Taj Mahal is an ivory-white marble mausoleum on the south bank of the Yamuna river in the Indian city of Agra. It was commissioned in 1632 by the Mughal emperor Shah Jahan to house the tomb of his favourite wife, Mumtaz Mahal. The tomb is the centrepiece of a 17-hectare complex, which includes a mosque and a guest house, and is set in formal gardens bounded on three sides by a crenellated wall.',
+  'The Taj Mahal was designated as a UNESCO World Heritage Site in 1983 for being "the jewel of Muslim art in India and one of the universally admired masterpieces of the world''s heritage". It is regarded by many as the best example of Mughal architecture and a symbol of India''s rich history. The Taj Mahal attracts 6–7 million visitors a year and in 2007, it was declared a winner of the New7Wonders of the World initiative.',
+  '["Built over 22 years (1632-1654)", "Made of white marble from Rajasthan", "UNESCO World Heritage Site since 1983", "Employs 20,000 artisans", "Height: 73 meters (240 feet)", "Cost: 32 million rupees (then)", "Symmetrical design on all four sides", "Houses the tomb of Mumtaz Mahal"]',
+  'https://images.unsplash.com/photo-1564507592333-c60657eea523?ixlib=rb-4.0.3&auto=format&fit=crop&w=2071&q=80',
+  null,
+  null
+),
+(
+  'red-fort',
+  'Red Fort',
+  'Delhi',
+  1648,
+  'Fort Palace',
+  'Mughal Era',
+  true,
+  'The Red Fort or Lal Qila is a historic fortified palace in Delhi, India that served as the main residence of the Mughal Emperors for nearly 200 years, until 1856. It is located in the center of Delhi and houses a number of museums. In addition to accommodating the emperors and their households, it was the ceremonial and political center of the Mughal state and the setting for events critically impacting the region.',
+  'Constructed in 1639 by the fifth Mughal Emperor Shah Jahan as the palace fort of his capital Shahjahanabad, the Red Fort is named for its massive enclosing walls of red sandstone and is adjacent to the older Salimgarh Fort. The imperial apartments consist of a row of pavilions, connected by a water channel known as the Stream of Paradise.',
+  '["Built by Shah Jahan in 1639", "UNESCO World Heritage Site", "Covers 254.67 hectares", "Made of red sandstone", "Scene of Indian independence", "Houses several museums", "Famous for Red Fort speech", "Symbol of India''s sovereignty"]',
+  'https://images.unsplash.com/photo-1587474260584-136574528ed5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+  null,
+  null
+),
+(
+  'konark-sun-temple',
+  'Konark Sun Temple',
+  'Konark, Odisha',
+  1250,
+  'Temple',
+  'Medieval Period',
+  true,
+  'The Konark Sun Temple is a 13th-century CE (year 1250) Hindu Sun temple at Konark about 35 kilometres northeast of Puri on the coastline of Odisha, India. The temple is attributed to king Narasimhadeva I of the Eastern Ganga Dynasty about 1250 CE. Dedicated to the Hindu sun god Surya, what remains of the temple complex has the appearance of a 100-foot high chariot with immense wheels and horses, all carved from stone.',
+  'Once over 200 feet high, much of the temple is now in ruins, in particular the large shikkhara tower over the sanctuary; at one time this rose much higher than the mandapa that remains. The structures were built from Khondalite rocks. The temple is one of the most renowned temples in India and is a World Heritage Site. It is also featured on the reverse of the Indian currency note of 10 rupees to signify its importance to Indian cultural heritage.',
+  '["Built in 13th century CE", "UNESCO World Heritage Site", "Dedicated to Sun God Surya", "Designed as solar chariot", "Famous for erotic sculptures", "Astronomical significance", "Khondalite stone construction", "Featured on 10 rupee note"]',
+  'https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+  null,
+  null
+),
+(
+  'hawa-mahal',
+  'Hawa Mahal',
+  'Jaipur, Rajasthan',
+  1799,
+  'Palace',
+  'Rajput Era',
+  true,
+  'Hawa Mahal is a palace in the city of Jaipur, India. Built from red and pink sandstone, it is on the edge of the City Palace, Jaipur, and extends to the Zenana, or women''s chambers. The structure was built in 1799 by the Maharaja Sawai Pratap Singh, and designed by Lal Chand Ustad in the form of the crown of Krishna, the Hindu god.',
+  'Its unique five-storey exterior is akin to a honeycomb with its 953 small windows called Jharokhas decorated with intricate latticework. The original intention of the lattice was to allow royal ladies to observe everyday life in the street below without being seen, as they had to observe strict purdah (face cover). Built of red and pink sandstone, the palace sits on the edge of the City Palace and extends to the zenana or women''s chambers.',
+  '["Built in 1799 by Maharaja Sawai Pratap Singh", "953 small windows (Jharokhas)", "Five-storey honeycomb structure", "Made of red and pink sandstone", "Designed for royal ladies", "No stairs, only ramps", "Unique lattice work", "Symbol of Jaipur architecture"]',
+  'https://images.unsplash.com/photo-1477587458883-47145ed94245?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+  null,
+  null
+);
