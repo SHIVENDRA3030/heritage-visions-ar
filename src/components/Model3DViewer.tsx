@@ -28,6 +28,15 @@ export function Model3DViewer({ glbUrl, usdzUrl, modelTitle }: Model3DViewerProp
     
     if (!document.querySelector('script[src*="model-viewer"]')) {
       document.head.appendChild(script);
+      
+      // Add error handling for script loading
+      script.onload = () => {
+        console.log('Model Viewer loaded successfully');
+      };
+      
+      script.onerror = () => {
+        console.error('Failed to load Model Viewer');
+      };
     }
 
     return () => {
@@ -38,7 +47,12 @@ export function Model3DViewer({ glbUrl, usdzUrl, modelTitle }: Model3DViewerProp
   if (!glbUrl && !usdzUrl) return null;
 
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+  const isAndroid = /Android/.test(navigator.userAgent);
+  
+  // For AR, use USDZ on iOS and GLB on Android/other platforms
   const arModel = isIOS && usdzUrl ? usdzUrl : glbUrl;
+  
+  console.log('Model3DViewer rendering:', { glbUrl, usdzUrl, arModel, isIOS, isAndroid });
 
   return (
     <motion.div
