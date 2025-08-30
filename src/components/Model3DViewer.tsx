@@ -67,6 +67,14 @@ export function Model3DViewer({ glbUrl, usdzUrl, modelTitle }: Model3DViewerProp
         </h3>
       </div>
 
+      {/* Debug info for development */}
+      <div className="text-xs text-muted-foreground bg-muted/50 p-2 rounded mb-4">
+        <div>GLB URL: {glbUrl || 'Not available'}</div>
+        <div>USDZ URL: {usdzUrl || 'Not available'}</div>
+        <div>Device: {isIOS ? 'iOS' : isAndroid ? 'Android' : 'Other'}</div>
+        <div>AR Model URL: {arModel}</div>
+      </div>
+
       <div className="embed-container overflow-hidden">
         <model-viewer
           ref={modelViewerRef}
@@ -78,14 +86,40 @@ export function Model3DViewer({ glbUrl, usdzUrl, modelTitle }: Model3DViewerProp
           ar
           ar-modes="webxr scene-viewer quick-look"
           environment-image="neutral"
-          poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect width='100' height='100' fill='%23f0f0f0'/%3E%3Ctext x='50' y='50' text-anchor='middle' dy='.3em' fill='%23666'%3ELoading...%3C/text%3E%3C/svg%3E"
+          poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect width='100' height='100' fill='%23f0f0f0'/%3E%3Ctext x='50' y='50' text-anchor='middle' dy='.3em' fill='%23666'%3ELoading 3D Model...%3C/text%3E%3C/svg%3E"
           loading="lazy"
+          onLoad={() => {
+            console.log('✅ Model loaded successfully');
+          }}
+          onError={(event: any) => {
+            console.error('❌ Model loading error:', event);
+            console.error('GLB URL:', glbUrl);
+            console.error('USDZ URL:', usdzUrl);
+            console.error('Event details:', event.detail);
+          }}
+          onModelLoad={() => {
+            console.log('✅ Model-viewer model-load event fired');
+          }}
+          onProgress={(event: any) => {
+            console.log('📊 Loading progress:', event.detail);
+          }}
           style={{
             width: '100%',
             height: '500px',
             backgroundColor: 'hsl(var(--muted))',
+            border: '2px dashed hsl(var(--border))',
           }}
         >
+          {/* Loading indicator */}
+          <div slot="poster" className="flex items-center justify-center h-full">
+            <div className="text-center">
+              <div className="animate-spin w-8 h-8 border-4 border-primary border-t-transparent rounded-full mx-auto mb-4"></div>
+              <p className="text-muted-foreground">Loading 3D Model...</p>
+              <p className="text-xs text-muted-foreground mt-2">
+                Large files may take time to load
+              </p>
+            </div>
+          </div>
           <div className="absolute bottom-4 left-4 right-4 flex flex-col sm:flex-row gap-2 z-10">
             <Button
               variant="secondary"
