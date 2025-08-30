@@ -184,7 +184,14 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_3d_model_mime_type: {
+        Args: { file_name: string }
+        Returns: string
+      }
+      update_3d_model_mime_types: {
+        Args: Record<PropertyKey, never>
+        Returns: undefined
+      }
     }
     Enums: {
       [_ in never]: never
