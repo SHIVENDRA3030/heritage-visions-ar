@@ -87,7 +87,7 @@ export function Model3DViewer({
         console.log('✅ Model-viewer model-load event fired');
       }} onProgress={(event: any) => {
         console.log('📊 Loading progress:', event.detail);
-      }} className="w-full h-full bg-muted border-2 border-dashed border-border rounded-lg mx-0">
+      }} className="w-full h-full bg-muted border-2 border-dashed border-border rounded-lg mx-px my-0">
           {/* Loading indicator */}
           <div slot="poster" className="flex items-center justify-center h-full">
             <div className="text-center">
@@ -98,7 +98,7 @@ export function Model3DViewer({
               </p>
             </div>
           </div>
-          <div className="absolute bottom-2 left-2 right-2 sm:bottom-4 sm:left-4 sm:right-4 flex flex-col sm:flex-row gap-2 z-10 my-0">
+          <div className="absolute bottom-2 left-2 right-2 sm:bottom-4 sm:left-4 sm:right-4 flex flex-col sm:flex-row gap-2 z-10 my-[11px] py-[12px] px-[44px] mx-[38px]">
             <Button variant="secondary" size="sm" className="bg-white/90 text-foreground hover:bg-white shadow-lg backdrop-blur-sm text-xs sm:text-sm" onClick={() => {
             if (modelViewerRef.current) {
               modelViewerRef.current.activateAR();
@@ -108,7 +108,7 @@ export function Model3DViewer({
               View in AR
             </Button>
             
-            <div className="flex-1 text-white/90 text-xs sm:text-sm bg-black/50 backdrop-blur-sm px-2 sm:px-3 py-1 sm:py-2 rounded">
+            <div className="flex-1 text-white/90 text-xs sm:text-sm bg-black/50 backdrop-blur-sm px-2 sm:px-3 py-1 sm:py-2 rounded mx-0 my-0">
               <strong>Controls:</strong> <span className="hidden sm:inline">Drag to rotate • Scroll to zoom • Pinch on mobile</span><span className="sm:hidden">Pinch & drag</span>
             </div>
           </div>
