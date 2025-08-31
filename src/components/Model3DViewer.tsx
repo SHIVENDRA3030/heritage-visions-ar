@@ -68,7 +68,7 @@ export function Model3DViewer({
       </div>
 
       {/* Debug info for development */}
-      <div className="text-xs text-muted-foreground bg-muted/50 p-2 rounded mb-4">
+      <div className="hidden text-xs text-muted-foreground bg-muted/50 p-2 rounded mb-4">
         <div>GLB URL: {glbUrl || 'Not available'}</div>
         <div>USDZ URL: {usdzUrl || 'Not available'}</div>
         <div>Device: {isIOS ? 'iOS' : isAndroid ? 'Android' : 'Other'}</div>
