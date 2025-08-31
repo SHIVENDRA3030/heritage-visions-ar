@@ -98,24 +98,24 @@ export function ARVREmbeds({ embeds, lowBandwidth = false }: ARVREmbedProps) {
       </div>
 
       {/* Embed Selection */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mb-6">
         {embedOptions.map((option) => {
           const Icon = option.icon;
           return (
             <button
               key={option.id}
               onClick={() => setActiveEmbed(activeEmbed === option.id ? null : option.id)}
-              className={`p-4 rounded-lg border-2 transition-all text-left ${
+              className={`p-3 sm:p-4 rounded-lg border-2 transition-all text-left ${
                 activeEmbed === option.id
                   ? 'border-highlight bg-highlight/10'
                   : 'border-border hover:border-highlight/50 bg-card'
               }`}
             >
-              <Icon className={`w-8 h-8 mb-3 ${
+              <Icon className={`w-6 h-6 sm:w-8 sm:h-8 mb-2 sm:mb-3 ${
                 activeEmbed === option.id ? 'text-highlight' : 'text-primary'
               }`} />
-              <h4 className="font-semibold text-foreground mb-1">{option.title}</h4>
-              <p className="text-sm text-muted-foreground">{option.description}</p>
+              <h4 className="font-semibold text-foreground mb-1 text-sm sm:text-base">{option.title}</h4>
+              <p className="text-xs sm:text-sm text-muted-foreground">{option.description}</p>
             </button>
           );
         })}
@@ -129,12 +129,14 @@ export function ARVREmbeds({ embeds, lowBandwidth = false }: ARVREmbedProps) {
           transition={{ duration: 0.3 }}
           className="embed-container"
         >
-          <div 
-            className="w-full aspect-[16/9] md:aspect-[16/10]"
-            dangerouslySetInnerHTML={{ 
-              __html: embedOptions.find(opt => opt.id === activeEmbed)?.embed || '' 
-            }}
-          />
+          <div className="responsive-embed-container">
+            <div 
+              className="responsive-embed-content"
+              dangerouslySetInnerHTML={{ 
+                __html: embedOptions.find(opt => opt.id === activeEmbed)?.embed || '' 
+              }}
+            />
+          </div>
         </motion.div>
       )}
 

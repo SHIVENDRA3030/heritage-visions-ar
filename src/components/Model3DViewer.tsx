@@ -75,7 +75,7 @@ export function Model3DViewer({ glbUrl, usdzUrl, modelTitle }: Model3DViewerProp
         <div>AR Model URL: {arModel}</div>
       </div>
 
-      <div className="embed-container overflow-hidden">
+      <div className="embed-container aspect-[4/3] sm:aspect-[16/10] lg:aspect-[16/9] min-h-[300px] max-h-[600px]">
         <model-viewer
           ref={modelViewerRef}
           src={glbUrl}
@@ -103,12 +103,7 @@ export function Model3DViewer({ glbUrl, usdzUrl, modelTitle }: Model3DViewerProp
           onProgress={(event: any) => {
             console.log('📊 Loading progress:', event.detail);
           }}
-          style={{
-            width: '100%',
-            height: '500px',
-            backgroundColor: 'hsl(var(--muted))',
-            border: '2px dashed hsl(var(--border))',
-          }}
+          className="w-full h-full bg-muted border-2 border-dashed border-border rounded-lg"
         >
           {/* Loading indicator */}
           <div slot="poster" className="flex items-center justify-center h-full">
@@ -120,23 +115,23 @@ export function Model3DViewer({ glbUrl, usdzUrl, modelTitle }: Model3DViewerProp
               </p>
             </div>
           </div>
-          <div className="absolute bottom-4 left-4 right-4 flex flex-col sm:flex-row gap-2 z-10">
+          <div className="absolute bottom-2 left-2 right-2 sm:bottom-4 sm:left-4 sm:right-4 flex flex-col sm:flex-row gap-2 z-10">
             <Button
               variant="secondary"
               size="sm"
-              className="bg-white/90 text-foreground hover:bg-white shadow-lg backdrop-blur-sm"
+              className="bg-white/90 text-foreground hover:bg-white shadow-lg backdrop-blur-sm text-xs sm:text-sm"
               onClick={() => {
                 if (modelViewerRef.current) {
                   modelViewerRef.current.activateAR();
                 }
               }}
             >
-              <Smartphone className="w-4 h-4 mr-2" />
+              <Smartphone className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
               View in AR
             </Button>
             
-            <div className="flex-1 text-white/90 text-sm bg-black/50 backdrop-blur-sm px-3 py-2 rounded">
-              <strong>Controls:</strong> Drag to rotate • Scroll to zoom • Pinch on mobile
+            <div className="flex-1 text-white/90 text-xs sm:text-sm bg-black/50 backdrop-blur-sm px-2 sm:px-3 py-1 sm:py-2 rounded">
+              <strong>Controls:</strong> <span className="hidden sm:inline">Drag to rotate • Scroll to zoom • Pinch on mobile</span><span className="sm:hidden">Pinch & drag</span>
             </div>
           </div>
         </model-viewer>
