@@ -98,7 +98,7 @@ export function Model3DViewer({
               </p>
             </div>
           </div>
-          <div className="absolute bottom-2 left-2 right-2 sm:bottom-4 sm:left-4 sm:right-4 flex flex-col sm:flex-row gap-2 z-10 my-[11px] py-[12px] px-[44px] mx-[38px]">
+          <div className="absolute bottom-2 left-2 right-2 sm:bottom-4 sm:left-4 sm:right-4 flex flex-col sm:flex-row gap-2 z-10">
             <Button variant="secondary" size="sm" className="bg-white/90 text-foreground hover:bg-white shadow-lg backdrop-blur-sm text-xs sm:text-sm" onClick={() => {
             if (modelViewerRef.current) {
               modelViewerRef.current.activateAR();
