@@ -75,8 +75,9 @@ export function Model3DViewer({
         <div>AR Model URL: {arModel}</div>
       </div>
 
-      <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] lg:aspect-[16/9] min-h-[300px] max-h-[600px] rounded-lg overflow-hidden bg-background">
-        <model-viewer ref={modelViewerRef} src={glbUrl} ios-src={usdzUrl} alt={modelTitle} auto-rotate camera-controls ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect width='100' height='100' fill='%23f8f9fa'/%3E%3Ctext x='50' y='50' text-anchor='middle' dy='.3em' fill='%23666'%3ELoading 3D Model...%3C/text%3E%3C/svg%3E" loading="lazy" onLoad={() => {
+      <div className="relative w-full h-0 pb-[56.25%] sm:pb-[60%] md:pb-[56.25%] rounded-lg overflow-hidden bg-background">
+        <div className="absolute inset-0 w-full h-full">
+          <model-viewer ref={modelViewerRef} src={glbUrl} ios-src={usdzUrl} alt={modelTitle} auto-rotate camera-controls ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect width='100' height='100' fill='%23f8f9fa'/%3E%3Ctext x='50' y='50' text-anchor='middle' dy='.3em' fill='%23666'%3ELoading 3D Model...%3C/text%3E%3C/svg%3E" loading="lazy" onLoad={() => {
         console.log('✅ Model loaded successfully');
       }} onError={(event: any) => {
         console.error('❌ Model loading error:', event);
@@ -113,6 +114,7 @@ export function Model3DViewer({
             </div>
           </div>
         </model-viewer>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-muted-foreground">
