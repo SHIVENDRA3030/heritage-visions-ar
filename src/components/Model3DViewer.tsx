@@ -2,13 +2,11 @@ import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Box, Smartphone } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
 interface Model3DViewerProps {
   glbUrl?: string | null;
   usdzUrl?: string | null;
   modelTitle: string;
 }
-
 declare global {
   namespace JSX {
     interface IntrinsicElements {
@@ -16,50 +14,52 @@ declare global {
     }
   }
 }
-
-export function Model3DViewer({ glbUrl, usdzUrl, modelTitle }: Model3DViewerProps) {
+export function Model3DViewer({
+  glbUrl,
+  usdzUrl,
+  modelTitle
+}: Model3DViewerProps) {
   const modelViewerRef = useRef<any>(null);
-
   useEffect(() => {
     // Dynamically import model-viewer
     const script = document.createElement('script');
     script.type = 'module';
     script.src = 'https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js';
-    
     if (!document.querySelector('script[src*="model-viewer"]')) {
       document.head.appendChild(script);
-      
+
       // Add error handling for script loading
       script.onload = () => {
         console.log('Model Viewer loaded successfully');
       };
-      
       script.onerror = () => {
         console.error('Failed to load Model Viewer');
       };
     }
-
     return () => {
       // Cleanup if needed
     };
   }, []);
-
   if (!glbUrl && !usdzUrl) return null;
-
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
   const isAndroid = /Android/.test(navigator.userAgent);
-  
+
   // For AR, use USDZ on iOS and GLB on Android/other platforms
   const arModel = isIOS && usdzUrl ? usdzUrl : glbUrl;
-  
-  console.log('Model3DViewer rendering:', { glbUrl, usdzUrl, arModel, isIOS, isAndroid });
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="space-y-4"
-    >
+  console.log('Model3DViewer rendering:', {
+    glbUrl,
+    usdzUrl,
+    arModel,
+    isIOS,
+    isAndroid
+  });
+  return <motion.div initial={{
+    opacity: 0,
+    y: 20
+  }} animate={{
+    opacity: 1,
+    y: 0
+  }} className="space-y-4">
       <div className="flex items-center gap-3 mb-6">
         <Box className="w-6 h-6 text-primary" />
         <h3 className="text-2xl font-heritage font-semibold text-foreground">
@@ -76,35 +76,18 @@ export function Model3DViewer({ glbUrl, usdzUrl, modelTitle }: Model3DViewerProp
       </div>
 
       <div className="embed-container aspect-[4/3] sm:aspect-[16/10] lg:aspect-[16/9] min-h-[300px] max-h-[600px]">
-        <model-viewer
-          ref={modelViewerRef}
-          src={glbUrl}
-          ios-src={usdzUrl}
-          alt={modelTitle}
-          auto-rotate
-          camera-controls
-          ar
-          ar-modes="webxr scene-viewer quick-look"
-          environment-image="neutral"
-          poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect width='100' height='100' fill='%23f0f0f0'/%3E%3Ctext x='50' y='50' text-anchor='middle' dy='.3em' fill='%23666'%3ELoading 3D Model...%3C/text%3E%3C/svg%3E"
-          loading="lazy"
-          onLoad={() => {
-            console.log('✅ Model loaded successfully');
-          }}
-          onError={(event: any) => {
-            console.error('❌ Model loading error:', event);
-            console.error('GLB URL:', glbUrl);
-            console.error('USDZ URL:', usdzUrl);
-            console.error('Event details:', event.detail);
-          }}
-          onModelLoad={() => {
-            console.log('✅ Model-viewer model-load event fired');
-          }}
-          onProgress={(event: any) => {
-            console.log('📊 Loading progress:', event.detail);
-          }}
-          className="w-full h-full bg-muted border-2 border-dashed border-border rounded-lg"
-        >
+        <model-viewer ref={modelViewerRef} src={glbUrl} ios-src={usdzUrl} alt={modelTitle} auto-rotate camera-controls ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect width='100' height='100' fill='%23f0f0f0'/%3E%3Ctext x='50' y='50' text-anchor='middle' dy='.3em' fill='%23666'%3ELoading 3D Model...%3C/text%3E%3C/svg%3E" loading="lazy" onLoad={() => {
+        console.log('✅ Model loaded successfully');
+      }} onError={(event: any) => {
+        console.error('❌ Model loading error:', event);
+        console.error('GLB URL:', glbUrl);
+        console.error('USDZ URL:', usdzUrl);
+        console.error('Event details:', event.detail);
+      }} onModelLoad={() => {
+        console.log('✅ Model-viewer model-load event fired');
+      }} onProgress={(event: any) => {
+        console.log('📊 Loading progress:', event.detail);
+      }} className="w-full h-full bg-muted border-2 border-dashed border-border rounded-lg mx-0">
           {/* Loading indicator */}
           <div slot="poster" className="flex items-center justify-center h-full">
             <div className="text-center">
@@ -115,17 +98,12 @@ export function Model3DViewer({ glbUrl, usdzUrl, modelTitle }: Model3DViewerProp
               </p>
             </div>
           </div>
-          <div className="absolute bottom-2 left-2 right-2 sm:bottom-4 sm:left-4 sm:right-4 flex flex-col sm:flex-row gap-2 z-10">
-            <Button
-              variant="secondary"
-              size="sm"
-              className="bg-white/90 text-foreground hover:bg-white shadow-lg backdrop-blur-sm text-xs sm:text-sm"
-              onClick={() => {
-                if (modelViewerRef.current) {
-                  modelViewerRef.current.activateAR();
-                }
-              }}
-            >
+          <div className="absolute bottom-2 left-2 right-2 sm:bottom-4 sm:left-4 sm:right-4 flex flex-col sm:flex-row gap-2 z-10 my-0">
+            <Button variant="secondary" size="sm" className="bg-white/90 text-foreground hover:bg-white shadow-lg backdrop-blur-sm text-xs sm:text-sm" onClick={() => {
+            if (modelViewerRef.current) {
+              modelViewerRef.current.activateAR();
+            }
+          }}>
               <Smartphone className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
               View in AR
             </Button>
@@ -164,6 +142,5 @@ export function Model3DViewer({ glbUrl, usdzUrl, modelTitle }: Model3DViewerProp
           </ul>
         </div>
       </div>
-    </motion.div>
-  );
+    </motion.div>;
 }
