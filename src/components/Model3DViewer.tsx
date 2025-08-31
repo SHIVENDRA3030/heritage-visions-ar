@@ -75,7 +75,7 @@ export function Model3DViewer({
         <div>AR Model URL: {arModel}</div>
       </div>
 
-      <div className="embed-container aspect-[4/3] sm:aspect-[16/10] lg:aspect-[16/9] min-h-[300px] max-h-[600px]">
+      <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] lg:aspect-[16/9] min-h-[300px] max-h-[600px] rounded-lg overflow-hidden bg-muted border-2 border-dashed border-border">
         <model-viewer ref={modelViewerRef} src={glbUrl} ios-src={usdzUrl} alt={modelTitle} auto-rotate camera-controls ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect width='100' height='100' fill='%23f0f0f0'/%3E%3Ctext x='50' y='50' text-anchor='middle' dy='.3em' fill='%23666'%3ELoading 3D Model...%3C/text%3E%3C/svg%3E" loading="lazy" onLoad={() => {
         console.log('✅ Model loaded successfully');
       }} onError={(event: any) => {
@@ -87,7 +87,7 @@ export function Model3DViewer({
         console.log('✅ Model-viewer model-load event fired');
       }} onProgress={(event: any) => {
         console.log('📊 Loading progress:', event.detail);
-      }} className="w-full h-full bg-muted border-2 border-dashed border-border rounded-lg mx-px my-0">
+      }} className="absolute inset-0 w-full h-full rounded-lg" style={{ display: 'block' }}>
           {/* Loading indicator */}
           <div slot="poster" className="flex items-center justify-center h-full">
             <div className="text-center">
