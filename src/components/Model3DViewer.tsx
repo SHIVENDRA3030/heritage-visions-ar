@@ -75,8 +75,8 @@ export function Model3DViewer({
         <div>AR Model URL: {arModel}</div>
       </div>
 
-      <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] lg:aspect-[16/9] min-h-[300px] max-h-[600px] rounded-lg overflow-hidden bg-muted border-2 border-dashed border-border">
-        <model-viewer ref={modelViewerRef} src={glbUrl} ios-src={usdzUrl} alt={modelTitle} auto-rotate camera-controls ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect width='100' height='100' fill='%23f0f0f0'/%3E%3Ctext x='50' y='50' text-anchor='middle' dy='.3em' fill='%23666'%3ELoading 3D Model...%3C/text%3E%3C/svg%3E" loading="lazy" onLoad={() => {
+      <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] lg:aspect-[16/9] min-h-[300px] max-h-[600px] rounded-lg overflow-hidden bg-background">
+        <model-viewer ref={modelViewerRef} src={glbUrl} ios-src={usdzUrl} alt={modelTitle} auto-rotate camera-controls ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect width='100' height='100' fill='%23f8f9fa'/%3E%3Ctext x='50' y='50' text-anchor='middle' dy='.3em' fill='%23666'%3ELoading 3D Model...%3C/text%3E%3C/svg%3E" loading="lazy" onLoad={() => {
         console.log('✅ Model loaded successfully');
       }} onError={(event: any) => {
         console.error('❌ Model loading error:', event);
@@ -89,7 +89,7 @@ export function Model3DViewer({
         console.log('📊 Loading progress:', event.detail);
       }} className="absolute inset-0 w-full h-full rounded-lg" style={{ display: 'block' }}>
           {/* Loading indicator */}
-          <div slot="poster" className="flex items-center justify-center h-full">
+          <div slot="poster" className="flex items-center justify-center h-full bg-background">
             <div className="text-center">
               <div className="animate-spin w-8 h-8 border-4 border-primary border-t-transparent rounded-full mx-auto mb-4"></div>
               <p className="text-muted-foreground">Loading 3D Model...</p>
@@ -98,18 +98,18 @@ export function Model3DViewer({
               </p>
             </div>
           </div>
-          <div className="absolute bottom-2 left-2 right-2 sm:bottom-4 sm:left-4 sm:right-4 flex flex-col sm:flex-row gap-2 z-10">
-            <Button variant="secondary" size="sm" className="bg-white/90 text-foreground hover:bg-white shadow-lg backdrop-blur-sm text-xs sm:text-sm" onClick={() => {
+          <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between z-10">
+            <Button variant="outline" size="sm" className="bg-background/95 text-foreground hover:bg-background border-border shadow-sm backdrop-blur-sm text-sm font-medium px-4 py-2" onClick={() => {
             if (modelViewerRef.current) {
               modelViewerRef.current.activateAR();
             }
           }}>
-              <Smartphone className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+              <Smartphone className="w-4 h-4 mr-2" />
               View in AR
             </Button>
             
-            <div className="flex-1 text-white/90 text-xs sm:text-sm bg-black/50 backdrop-blur-sm px-2 sm:px-3 py-1 sm:py-2 rounded mx-0 my-0">
-              <strong>Controls:</strong> <span className="hidden sm:inline">Drag to rotate • Scroll to zoom • Pinch on mobile</span><span className="sm:hidden">Pinch & drag</span>
+            <div className="text-foreground text-sm bg-muted/90 backdrop-blur-sm px-4 py-2 rounded font-medium">
+              <strong>Controls:</strong> Drag to rotate • Scroll to zoom • Pinch on mobile
             </div>
           </div>
         </model-viewer>
