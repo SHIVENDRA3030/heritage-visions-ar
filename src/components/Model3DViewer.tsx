@@ -88,7 +88,9 @@ export function Model3DViewer({
         console.log('✅ Model-viewer model-load event fired');
       }} onProgress={(event: any) => {
         console.log('📊 Loading progress:', event.detail);
-      }} className="absolute inset-0 w-full h-full rounded-lg" style={{ display: 'block' }}>
+      }} style={{
+        display: 'block'
+      }} className="absolute inset-0 w-full h-full rounded-lg mx-0 py-[8px]">
           {/* Loading indicator */}
           <div slot="poster" className="flex items-center justify-center h-full bg-background">
             <div className="text-center">
@@ -99,7 +101,7 @@ export function Model3DViewer({
               </p>
             </div>
           </div>
-          <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between z-10">
+          <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between z-10 mx-0 my-0 px-0 py-0">
             <Button variant="outline" size="sm" className="bg-background/95 text-foreground hover:bg-background border-border shadow-sm backdrop-blur-sm text-sm font-medium px-4 py-2" onClick={() => {
             if (modelViewerRef.current) {
               modelViewerRef.current.activateAR();
