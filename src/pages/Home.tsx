@@ -1,13 +1,16 @@
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import { HeroSection } from "@/components/HeroSection";
 import { MonumentCard } from "@/components/MonumentCard";
 import { getMonuments, searchMonuments } from "@/lib/supabase-queries";
 import { Monument } from "@/types/monument";
-import { Loader2 } from "lucide-react";
+import { Loader2, Clock } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
+  const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredMonuments, setFilteredMonuments] = useState<Monument[]>([]);
 
@@ -70,9 +73,26 @@ export default function Home() {
                 Heritage Collection
               </span>
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto font-lato">
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto font-lato mb-6">
               Journey through India's architectural marvels and cultural treasures
             </p>
+            
+            {/* Timeline Button */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="flex justify-center"
+            >
+              <Button
+                onClick={() => navigate("/timeline")}
+                className="heritage-button flex items-center gap-2"
+              >
+                <Clock className="w-4 h-4" />
+                Explore Timeline
+              </Button>
+            </motion.div>
           </motion.div>
 
           {isLoading ? (
