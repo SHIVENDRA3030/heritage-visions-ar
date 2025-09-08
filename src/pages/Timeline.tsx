@@ -5,6 +5,9 @@ import { ArrowLeft, Clock, Calendar } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { TimelineView } from "@/components/Timeline/TimelineView";
+import { Header } from "@/components/Navigation/Header";
+import { ScrollToTopButton, ReadingProgressBar } from "@/components/UI/FloatingElements";
+import { TimelineSkeleton } from "@/components/UI/LoadingSkeletons";
 import { getMonuments } from "@/lib/supabase-queries";
 
 export default function Timeline() {
@@ -37,41 +40,8 @@ export default function Timeline() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-muted/30">
-      {/* Header */}
-      <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => navigate("/")}
-                className="hover:bg-accent/20"
-              >
-                <ArrowLeft className="w-5 h-5" />
-              </Button>
-              <div className="flex items-center gap-3">
-                <div className="p-2 bg-gradient-to-r from-primary to-accent rounded-lg">
-                  <Clock className="w-5 h-5 text-white" />
-                </div>
-                <div>
-                  <h1 className="text-2xl font-heritage font-bold text-foreground">
-                    Interactive Timeline
-                  </h1>
-                  <p className="text-sm text-muted-foreground">
-                    Explore architectural evolution through time
-                  </p>
-                </div>
-              </div>
-            </div>
-            
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <Calendar className="w-4 h-4" />
-              <span>{monuments.length} monuments across history</span>
-            </div>
-          </div>
-        </div>
-      </header>
+      <Header monumentCount={monuments.length} />
+      <ReadingProgressBar />
 
       {/* Timeline Content */}
       <main className="max-w-7xl mx-auto px-4 py-8">
@@ -93,13 +63,19 @@ export default function Timeline() {
           </p>
         </motion.div>
 
-        <TimelineView
-          monuments={monuments}
-          isLoading={isLoading}
-          selectedPeriod={selectedPeriod}
-          onPeriodSelect={setSelectedPeriod}
-        />
+        {isLoading ? (
+          <TimelineSkeleton />
+        ) : (
+          <TimelineView
+            monuments={monuments}
+            isLoading={isLoading}
+            selectedPeriod={selectedPeriod}
+            onPeriodSelect={setSelectedPeriod}
+          />
+        )}
       </main>
+      
+      <ScrollToTopButton />
     </div>
   );
 }

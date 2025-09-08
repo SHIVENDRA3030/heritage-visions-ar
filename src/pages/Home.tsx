@@ -3,16 +3,21 @@ import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { HeroSection } from "@/components/HeroSection";
-import { MonumentCard } from "@/components/MonumentCard";
+import { EnhancedMonumentCard } from "@/components/UI/EnhancedMonumentCard";
+import { MonumentGridSkeleton } from "@/components/UI/LoadingSkeletons";
+import { ScrollToTopButton, ReadingProgressBar, FloatingStatusIndicator } from "@/components/UI/FloatingElements";
+import { Header } from "@/components/Navigation/Header";
 import { getMonuments, searchMonuments } from "@/lib/supabase-queries";
 import { Monument } from "@/types/monument";
-import { Loader2, Clock } from "lucide-react";
+import { Clock, Filter, Grid, List } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
 export default function Home() {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredMonuments, setFilteredMonuments] = useState<Monument[]>([]);
+  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
 
   const { 
     data: monuments = [], 
@@ -52,6 +57,10 @@ export default function Home() {
 
   return (
     <div className="min-h-screen">
+      <Header monumentCount={monuments.length} />
+      <ReadingProgressBar />
+      <FloatingStatusIndicator />
+      
       <HeroSection 
         monumentCount={monuments.length} 
         onSearch={handleSearch}
@@ -77,47 +86,71 @@ export default function Home() {
               Journey through India's architectural marvels and cultural treasures
             </p>
             
-            {/* Timeline Button */}
+            {/* Action Bar */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
-              className="flex justify-center"
+              className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8"
             >
               <Button
                 onClick={() => navigate("/timeline")}
-                className="heritage-button flex items-center gap-2"
+                variant="gradient"
+                className="flex items-center gap-2"
               >
                 <Clock className="w-4 h-4" />
                 Explore Timeline
               </Button>
+              
+              <div className="flex items-center gap-2">
+                <Badge variant="outline" className="flex items-center gap-1">
+                  <Filter className="w-3 h-3" />
+                  {filteredMonuments.length} monuments
+                </Badge>
+                
+                <div className="flex items-center border rounded-lg p-1">
+                  <Button
+                    variant={viewMode === "grid" ? "secondary" : "ghost"}
+                    size="sm"
+                    onClick={() => setViewMode("grid")}
+                    className="h-8 w-8 p-0"
+                  >
+                    <Grid className="w-4 h-4" />
+                  </Button>
+                  <Button
+                    variant={viewMode === "list" ? "secondary" : "ghost"}
+                    size="sm"
+                    onClick={() => setViewMode("list")}
+                    className="h-8 w-8 p-0"
+                  >
+                    <List className="w-4 h-4" />
+                  </Button>
+                </div>
+              </div>
             </motion.div>
           </motion.div>
 
           {isLoading ? (
-            <div className="flex justify-center items-center py-16">
-              <Loader2 className="w-8 h-8 animate-spin text-primary" />
-              <span className="ml-2 text-muted-foreground">Loading monuments...</span>
-            </div>
+            <MonumentGridSkeleton />
           ) : (
             <motion.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+              className={`grid gap-6 ${
+                viewMode === "grid" 
+                  ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" 
+                  : "grid-cols-1 md:grid-cols-2 gap-8"
+              }`}
             >
               {filteredMonuments.map((monument, index) => (
-                <motion.div
-                  key={monument.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                >
-                  <MonumentCard monument={monument} />
-                </motion.div>
+                <EnhancedMonumentCard 
+                  key={monument.id} 
+                  monument={monument} 
+                  index={index}
+                />
               ))}
             </motion.div>
           )}
@@ -138,6 +171,8 @@ export default function Home() {
           )}
         </div>
       </section>
+
+      <ScrollToTopButton />
 
       {/* Footer */}
       <footer className="bg-card border-t border-border py-12">

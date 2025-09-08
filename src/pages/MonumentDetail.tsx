@@ -8,6 +8,10 @@ import { AudioPlayer } from "@/components/AudioPlayer";
 import { ImageGallery } from "@/components/ImageGallery";
 import { ARVREmbeds } from "@/components/ARVREmbeds";
 import { Model3DViewer } from "@/components/Model3DViewer";
+import { Header } from "@/components/Navigation/Header";
+import { ScrollToTopButton, ReadingProgressBar } from "@/components/UI/FloatingElements";
+import { MonumentDetailSkeleton } from "@/components/UI/LoadingSkeletons";
+import { StatusBadge, LocationBadge, YearBadge, BadgeCluster } from "@/components/UI/InteractiveBadges";
 import { 
   getMonumentBySlug, 
   getMonumentAudios, 
@@ -56,14 +60,7 @@ export default function MonumentDetail() {
   });
 
   if (monumentLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <Loader2 className="w-8 h-8 animate-spin text-primary mx-auto mb-4" />
-          <p className="text-muted-foreground">Loading monument details...</p>
-        </div>
-      </div>
-    );
+    return <MonumentDetailSkeleton />;
   }
 
   if (monumentError || !monument) {
@@ -85,19 +82,8 @@ export default function MonumentDetail() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <div className="sticky top-0 z-50 bg-background/95 backdrop-blur border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 py-4">
-          <Button
-            variant="ghost"
-            onClick={() => navigate("/")}
-            className="gap-2 hover:bg-muted"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Back to Monuments
-          </Button>
-        </div>
-      </div>
+      <Header />
+      <ReadingProgressBar />
 
       {/* Hero Section */}
       <div className="relative h-[60vh] overflow-hidden">
@@ -123,26 +109,23 @@ export default function MonumentDetail() {
                 {monument.name}
               </h1>
               
-              <div className="flex flex-wrap items-center gap-6 text-white/90">
-                {monument.location && (
-                  <div className="flex items-center gap-2">
-                    <MapPin className="w-5 h-5" />
-                    <span className="text-lg">{monument.location}</span>
-                  </div>
-                )}
-                {monument.build_year && (
-                  <div className="flex items-center gap-2">
-                    <Calendar className="w-5 h-5" />
-                    <span className="text-lg">{monument.build_year}</span>
-                  </div>
-                )}
-                {monument.type && (
-                  <div className="flex items-center gap-2">
-                    <Clock className="w-5 h-5" />
-                    <span className="text-lg">{monument.type}</span>
-                  </div>
-                )}
-              </div>
+              <BadgeCluster 
+                badges={[
+                  ...(monument.location ? [{
+                    type: "location" as const,
+                    props: { location: monument.location, interactive: true }
+                  }] : []),
+                  ...(monument.build_year ? [{
+                    type: "year" as const,
+                    props: { year: monument.build_year, interactive: true }
+                  }] : []),
+                  ...(monument.type ? [{
+                    type: "status" as const,
+                    props: { status: "historic" as const }
+                  }] : []),
+                ]}
+                className="mt-4"
+              />
             </motion.div>
           </div>
         </div>
@@ -326,6 +309,8 @@ export default function MonumentDetail() {
           </div>
         </div>
       </div>
+      
+      <ScrollToTopButton />
     </div>
   );
 }
