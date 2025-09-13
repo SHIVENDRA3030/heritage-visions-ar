@@ -75,7 +75,7 @@ export function Model3DViewer({
         <div>AR Model URL: {arModel}</div>
       </div>
 
-      <div className="relative w-full h-0 pb-[56.25%] sm:pb-[60%] md:pb-[56.25%] rounded-lg overflow-hidden bg-background">
+      <div className="relative w-full h-[400px] sm:h-[500px] md:h-[600px] lg:h-[700px] xl:h-[750px] rounded-lg overflow-hidden bg-background">
         <div className="absolute inset-0 w-full h-full">
           <model-viewer ref={modelViewerRef} src={glbUrl} ios-src={usdzUrl} alt={modelTitle} auto-rotate camera-controls ar ar-modes="webxr scene-viewer quick-look" environment-image="neutral" poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect width='100' height='100' fill='%23f8f9fa'/%3E%3Ctext x='50' y='50' text-anchor='middle' dy='.3em' fill='%23666'%3ELoading 3D Model...%3C/text%3E%3C/svg%3E" loading="lazy" onLoad={() => {
         console.log('✅ Model loaded successfully');
@@ -89,8 +89,10 @@ export function Model3DViewer({
       }} onProgress={(event: any) => {
         console.log('📊 Loading progress:', event.detail);
       }} style={{
-        display: 'block'
-      }} className="absolute inset-0 w-full h-full rounded-lg mx-0 py-[8px]">
+        display: 'block',
+        width: '100%',
+        height: '100%'
+      }} className="rounded-lg">
           {/* Loading indicator */}
           <div slot="poster" className="flex items-center justify-center h-full bg-background">
             <div className="text-center">
@@ -111,8 +113,12 @@ export function Model3DViewer({
               View in AR
             </Button>
             
-            <div className="text-foreground text-sm bg-muted/90 backdrop-blur-sm px-4 py-2 rounded font-medium">
+            <div className="hidden md:block text-foreground text-sm bg-muted/90 backdrop-blur-sm px-4 py-2 rounded font-medium">
               <strong>Controls:</strong> Drag to rotate • Scroll to zoom • Pinch on mobile
+            </div>
+            
+            <div className="md:hidden text-foreground text-xs bg-muted/90 backdrop-blur-sm px-3 py-1.5 rounded font-medium">
+              Touch & drag to explore
             </div>
           </div>
         </model-viewer>
